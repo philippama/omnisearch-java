@@ -9,13 +9,13 @@ public class AnalyserIntegrationTest {
     @Test
     public void interimTest() {
         Analyser analyser = new Analyser(new Tokeniser());
-        String searchPhrase = "red 5-door ford fieste desel coop";
+        String searchPhrase = "red 5-door Ford Ka+ desel coop";
 
         Search actualSearch = analyser.buildSearch(searchPhrase);
 
         Search expectedSearch = Search.builder()
                                       .withMake("ford")
-                                      .withModel("fieste")
+                                      .withModel("ka")
                                       .withBodyType("coop")
                                       .withFuel("desel")
                                       .withColour("red")
