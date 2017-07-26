@@ -1,5 +1,6 @@
 package pm.omnisearch;
 
+import pm.omnisearch.transformers.PhoneticNormaliser;
 import pm.omnisearch.transformers.TrailingPunctuationStripper;
 
 import java.util.List;
@@ -8,10 +9,12 @@ import java.util.stream.Stream;
 
 public class Analyser {
     private Tokeniser tokeniser;
+    private PhoneticNormaliser phoneticNormaliser;
 
-    public Analyser(Tokeniser tokeniser) {
+    public Analyser(Tokeniser tokeniser, PhoneticNormaliser phoneticNormaliser) {
 
         this.tokeniser = tokeniser;
+        this.phoneticNormaliser = phoneticNormaliser;
     }
 
     public Search buildSearch(String searchPhrase) {
@@ -20,6 +23,7 @@ public class Analyser {
         List<String> preparedTokens = Stream.of(tokens)
                                             .map(String::toLowerCase)
                                             .map(trailingPunctuationStripper::transform)
+                                            .map(phoneticNormaliser::transform)
                                             .collect(Collectors.toList());
 
         return Search.builder()
