@@ -3,6 +3,8 @@ package pm.omnisearch;
 import org.junit.Before;
 import org.junit.Test;
 import pm.omnisearch.transformers.PhoneticNormaliser;
+import pm.omnisearch.transformers.ToLowerCase;
+import pm.omnisearch.transformers.TrailingPunctuationStripper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
@@ -13,7 +15,8 @@ public class AnalyserIntegrationTest {
 
     @Before
     public void setUp() {
-        analyser = new Analyser(new Tokeniser(), new PhoneticNormaliser());
+        PhraseNormaliser phraseNormaliser = new PhraseNormaliser(new Tokeniser(), new ToLowerCase(), new TrailingPunctuationStripper(), new PhoneticNormaliser());
+        analyser = new Analyser(phraseNormaliser);
     }
 
     @Test
