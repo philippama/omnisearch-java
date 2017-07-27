@@ -16,7 +16,7 @@ public class PhoneticNormaliserTest {
 
     @Test
     public void keepsFirstCharacter() {
-        assertThat(normaliser.transform("pad")).isEqualTo("pad");
+        assertThat(normaliser.apply("pad")).isEqualTo("pad");
     }
 
     @Test
@@ -31,17 +31,17 @@ public class PhoneticNormaliserTest {
     }
 
     private void assertCharactersMapTo(String characters, String expectedCharacter) {
-        assertThat(normaliser.transform("p" + characters)).isEqualTo("p" + expectedCharacter);
+        assertThat(normaliser.apply("p" + characters)).isEqualTo("p" + expectedCharacter);
     }
 
     @Test
     public void keepsCharactersNotInALetterGroup() {
         String token = "p0123%^&+";
-        assertThat(normaliser.transform(token)).isEqualTo(token);
+        assertThat(normaliser.apply(token)).isEqualTo(token);
     }
 
     @Test
     public void compressesDuplicatesWhenCharactersWereInLetterGroup() {
-        assertThat(normaliser.transform("aeioubfpv000")).isEqualTo("ab000");
+        assertThat(normaliser.apply("aeioubfpv000")).isEqualTo("ab000");
     }
 }

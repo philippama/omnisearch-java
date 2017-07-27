@@ -16,14 +16,14 @@ public class TrailingPunctuationStripperTest {
 
     @Test
     public void stripsTrailingPunctuationCharacterAsRequired() {
-        assertThat(stripper.transform("Ka+")).isEqualTo("Ka");
-        assertThat(stripper.transform("Ka!")).isEqualTo("Ka");
-        assertThat(stripper.transform("Ka?")).isEqualTo("Ka");
+        assertThat(stripper.apply("Ka+")).isEqualTo("Ka");
+        assertThat(stripper.apply("Ka!")).isEqualTo("Ka");
+        assertThat(stripper.apply("Ka?")).isEqualTo("Ka");
     }
 
     @Test
     public void doesNotStripTrailingPunctuationCharacterWhenNotRequired() {
-        assertThat(stripper.transform("Ka=")).isEqualTo("Ka=");
+        assertThat(stripper.apply("Ka=")).isEqualTo("Ka=");
     }
 
 }

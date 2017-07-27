@@ -1,5 +1,5 @@
 package pm.omnisearch.transformers;
 
-public interface Transformer {
-    String transform(String token);
-}
+import java.util.function.Function;
+
+public interface Transformer extends Function<String, String> {}

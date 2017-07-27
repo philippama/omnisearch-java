@@ -22,8 +22,8 @@ public class Analyser {
         TrailingPunctuationStripper trailingPunctuationStripper = new TrailingPunctuationStripper();
         List<String> preparedTokens = Stream.of(tokens)
                                             .map(String::toLowerCase)
-                                            .map(trailingPunctuationStripper::transform)
-                                            .map(phoneticNormaliser::transform)
+                                            .map(trailingPunctuationStripper::apply)
+                                            .map(phoneticNormaliser::apply)
                                             .collect(Collectors.toList());
 
         return Search.builder()

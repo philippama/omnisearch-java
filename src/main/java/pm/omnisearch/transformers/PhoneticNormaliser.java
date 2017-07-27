@@ -14,7 +14,7 @@ public class PhoneticNormaliser implements Transformer {
     private String allLetters = String.join("", letterGroups);
 
     @Override
-    public String transform(String token) {
+    public String apply(String token) {
         String mappedToken = mapCharactersAccordingToLetterGroup(token);
         return compressAdjacentDuplicatesIfInLetterGroup(mappedToken);
     }
