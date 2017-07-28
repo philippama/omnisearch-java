@@ -23,11 +23,19 @@ class PhraseNormaliser {
     }
 
     List<String> getNormalisedTokens(String phrase) {
+        return getNormalisedTokenStream(phrase).collect(Collectors.toList());
+    }
+
+    String getNormalisedPhrase(String phrase) {
+        return getNormalisedTokenStream(phrase).collect(Collectors.joining(" "));
+    }
+
+    private Stream<String> getNormalisedTokenStream(String phrase) {
         String[] tokens = tokeniser.tokenise(phrase);
         return Stream.of(tokens)
                      .map(toLowerCase)
                      .map(trailingPunctuationStripper)
-                     .map(normaliser)
-                     .collect(Collectors.toList());
+                     .map(normaliser);
     }
+
 }

@@ -27,4 +27,13 @@ public class PhraseNormaliserTest {
 
         assertThat(normalisedTokens).containsExactly("rad", "5", "dar", "fard", "ka", "dacal", "cab");
     }
+
+    @Test
+    public void returnsNormalisedPhrase() {
+        String phrase = "red 5-door Ford Ka+ desel coop";
+
+        String normalisedPhrase = phraseNormaliser.getNormalisedPhrase(phrase);
+
+        assertThat(normalisedPhrase).isEqualTo("rad 5 dar fard ka dacal cab");
+    }
 }
