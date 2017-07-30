@@ -1,0 +1,11 @@
+Combi Van
+Convertible
+Coupe
+Estate
+Hatchback
+Hearse
+Limousine
+MPV
+Pickup
+SUV
+Saloon

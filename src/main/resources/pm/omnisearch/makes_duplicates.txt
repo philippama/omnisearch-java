@@ -1,0 +1,11 @@
+# The duplicated models are in brackets with the duplicates below.
+#
+# These would not be a problem if we treated "hwy" separately from vowels i.e. put them in a letter group if their own.
+#
+(Daihatsu)
+Dodge
+(Honda)
+Hyundai
+(Toyota)
+Tata
+

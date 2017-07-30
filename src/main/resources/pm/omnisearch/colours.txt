@@ -1,0 +1,13 @@
+Beige
+Black
+Blue
+Bronze
+Brown
+Gold
+Green
+Grey
+Pink
+Red
+Silver
+White
+Yellow

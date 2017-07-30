@@ -6,6 +6,8 @@ import pm.omnisearch.transformers.PhoneticNormaliser;
 import pm.omnisearch.transformers.ToLowerCase;
 import pm.omnisearch.transformers.TrailingPunctuationStripper;
 
+import java.io.IOException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
@@ -14,23 +16,24 @@ public class AnalyserIntegrationTest {
     private Analyser analyser;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         PhraseNormaliser phraseNormaliser = new PhraseNormaliser(new Tokeniser(), new ToLowerCase(), new TrailingPunctuationStripper(), new PhoneticNormaliser());
-        analyser = new Analyser(phraseNormaliser);
+        NormalisedDictionaryFactory normalisedDictionaryFactory = new NormalisedDictionaryFactory(phraseNormaliser);
+        analyser = new Analyser(normalisedDictionaryFactory, phraseNormaliser);
     }
 
     @Test
     public void interimTest() {
-        String searchPhrase = "red 5-door Ford Ka+ desel coop";
+        String searchPhrase = "red 5-door Ford Ka+ desel cupe";
 
         Search actualSearch = analyser.buildSearch(searchPhrase);
 
         Search expectedSearch = Search.builder()
-                                      .withMake("fard")
-                                      .withModel("ka")
-                                      .withBodyType("cab")
-                                      .withFuel("dacal")
-                                      .withColour("rad")
+                                      .withMake("Ford")
+                                      .withModel("Ka")
+                                      .withBodyType("Coupe")
+                                      .withFuel("Diesel")
+                                      .withColour("Red")
                                       .build();
         assertThat(actualSearch).isEqualTo(expectedSearch);
     }

@@ -1,0 +1,11 @@
+Bi Fuel
+Diesel
+Diesel Hybrid
+Diesel Plug-in Hybrid
+Electric
+Electric Hybrid
+Hydrogen Hybrid
+Petrol
+Petrol Ethanol
+Petrol Hybrid
+Petrol Plug-in Hybrid
