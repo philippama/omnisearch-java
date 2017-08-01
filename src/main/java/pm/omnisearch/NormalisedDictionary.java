@@ -19,4 +19,8 @@ class NormalisedDictionary {
     String get(String normalisedPhrase) {
         return dictionary.get(normalisedPhrase);
     }
+
+    boolean contains(String key) {
+        return dictionary.containsKey(key);
+    }
 }

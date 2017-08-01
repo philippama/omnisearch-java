@@ -1,5 +1,7 @@
 package pm.omnisearch;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Search {
@@ -8,13 +10,15 @@ public class Search {
     private String bodyType;
     private String fuel;
     private String colour;
+    private List<String> other;
 
-    private Search(String make, String model, String bodyType, String fuel, String colour) {
+    private Search(String make, String model, String bodyType, String fuel, String colour, List<String> other) {
         this.make = make;
         this.model = model;
         this.bodyType = bodyType;
         this.fuel = fuel;
         this.colour = colour;
+        this.other = other;
     }
 
     static Builder builder() {
@@ -41,9 +45,13 @@ public class Search {
         return colour;
     }
 
+    public List<String> getOther() {
+        return other;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(make, model, bodyType, fuel, colour);
+        return Objects.hash(make, model, bodyType, fuel, colour, other);
     }
 
     @Override
@@ -59,7 +67,8 @@ public class Search {
                 && Objects.equals(this.model, other.model)
                 && Objects.equals(this.bodyType, other.bodyType)
                 && Objects.equals(this.fuel, other.fuel)
-                && Objects.equals(this.colour, other.colour);
+                && Objects.equals(this.colour, other.colour)
+                && Objects.equals(this.other, other.other);
     }
 
     @Override
@@ -70,6 +79,7 @@ public class Search {
                 ", bodyType='" + bodyType + '\'' +
                 ", fuel='" + fuel + '\'' +
                 ", colour='" + colour + '\'' +
+                ", other=" + other +
                 '}';
     }
 
@@ -79,8 +89,11 @@ public class Search {
         private String bodyType;
         private String fuel;
         private String colour;
+        private List<String> other;
 
-        private Builder() {}
+        private Builder() {
+            other = new ArrayList<>();
+        }
 
         Builder withMake(String make) {
             this.make = make;
@@ -107,8 +120,13 @@ public class Search {
             return this;
         }
 
+        Builder withOther(String other) {
+            this.other.add(other);
+            return this;
+        }
+
         Search build() {
-            return new Search(make, model, bodyType, fuel, colour);
+            return new Search(make, model, bodyType, fuel, colour, other);
         }
     }
 }

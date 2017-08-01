@@ -9,7 +9,6 @@ import pm.omnisearch.transformers.TrailingPunctuationStripper;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Fail.fail;
 
 public class AnalyserIntegrationTest {
 
@@ -23,47 +22,20 @@ public class AnalyserIntegrationTest {
     }
 
     @Test
-    public void interimTest() {
-        String searchPhrase = "red 5-door Ford Ka+ desel cupe";
-
-        Search actualSearch = analyser.buildSearch(searchPhrase);
-
-        Search expectedSearch = Search.builder()
-                                      .withMake("Ford")
-                                      .withModel("Ka")
-                                      .withBodyType("Coupe")
-                                      .withFuel("Diesel")
-                                      .withColour("Red")
-                                      .build();
-        assertThat(actualSearch).isEqualTo(expectedSearch);
-    }
-
-    @Test
     public void normalisesSearchRequest() {
-        fail("TODO");
-        /*
-        build dictionaries of key = normalised value, value = make, model etc.
-        with search phrase
-            split into tokens
-            to lower case
-            remove trailing spaces
-            ignore empty strings
-            normalise
-            create a collection of normalised matching tokens / phrases plus unmatched phrases using dictionary keys
-        matching normalised tokens -> actual make / model etc. using dictionaries
-        */
-
-        String searchPhrase = "5-door alpha romeo desel coop";
+        String searchPhrase = "red 3-door alfa romi 4c limited edition petrol cupe";
 
         Search actualSearch = analyser.buildSearch(searchPhrase);
 
         Search expectedSearch = Search.builder()
                                       .withMake("Alfa Romeo")
-//                .withModel("")
+                                      .withModel("4C")
                                       .withBodyType("Coupe")
-                                      .withFuel("Diesel")
-//                .withColour("")
+                                      .withFuel("Petrol")
+                                      .withColour("Red")
+                                      .withOther("3 door")
                                       .build();
         assertThat(actualSearch).isEqualTo(expectedSearch);
     }
+
 }
